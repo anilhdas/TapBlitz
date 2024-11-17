@@ -1,16 +1,22 @@
+using TapBlitz.Matchable;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+namespace TapBlitz
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public class GameManager : MonoBehaviour
     {
+        private IMatchableGenerator _generator;
+
+        void Start()
+        {
+            _generator.GenerateMatchables(0);
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
         
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

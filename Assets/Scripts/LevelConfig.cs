@@ -1,14 +1,12 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "LevelConfig", menuName = "Configs/LevelConfig")]
-public class LevelConfig : ScriptableObject
+namespace TapBlitz.Config
 {
-    [Header("N")]
-    public int TotalRows = 5;
-
-    [Header("M")]
-    public int TotalCols = 4;
-
-    [Header("P")]
-    public int TotalColors = 4;
+    [CreateAssetMenu(fileName = "LevelConfig", menuName = "Configs/LevelConfig")]
+    public class LevelConfig : ScriptableObject
+    {
+        public int TotalRows = 5;
+        public int TotalCols = 4;
+        public int TotalColors = 4;
+    }
 }
