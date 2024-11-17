@@ -62,6 +62,7 @@ namespace TapBlitz.Grid
             for (int i = 0; i < _columnCount; i++)
             {
                 var column = new GameObject($"Column {i}");
+                column.transform.SetParent(layoutGroup.transform);
 
                 column.AddComponent<RectTransform>();
                 column.AddComponent<CanvasRenderer>();
@@ -90,7 +91,25 @@ namespace TapBlitz.Grid
             {
                 for (var colIdx = 0; colIdx < _columnCount; colIdx++)
                 {
-                    int tileId = Random.Range(0, _colors.Length);
+                    var tileId = Random.Range(0, _colors.Length);
+                    var tileColor = _colors[tileId];
+
+
+                    var tile = new GameObject($"Tile {rowIdx}, {colIdx}");
+                    tile.transform.SetParent(_columns[colIdx].transform);
+
+                    tile.AddComponent<RectTransform>();
+                    tile.AddComponent<CanvasRenderer>();
+
+                    var image = tile.AddComponent<Image>();
+                    image.color = tileColor;
+                    
+                    var button = tile.AddComponent<Button>();
+                    //colorBlock.normalColor = tileColor;
+                    //button.colors = colorBlock;
+
+
+                    //button.onClick = () => { };
 
                     //_tileGrid[rowIdx][colIdx] = 
                 }
