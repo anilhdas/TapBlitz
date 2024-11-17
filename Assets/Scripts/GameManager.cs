@@ -1,3 +1,4 @@
+using TapBlitz.Util;
 using TapBlitz.Matchable;
 using UnityEngine;
 
@@ -9,10 +10,11 @@ namespace TapBlitz
 
         void Start()
         {
+            Assert.IsTrue(_generator != null, $"{nameof(_generator)} in gameobject {gameObject.name} is not assigned");
+
             _generator.GenerateMatchables(0);
         }
 
-        // Update is called once per frame
         void Update()
         {
         

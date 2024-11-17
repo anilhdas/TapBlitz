@@ -4,10 +4,15 @@ namespace TapBlitz.Util
 {
     public class Assert
     {
-        public static void IsTrue(bool condition, string message = "")
+        public static void IsTrue(bool condition, string errorMessage)
         {
             if (!condition)
-                throw new Exception(@"Assertion failed: {message}");
+            {
+                if (string.IsNullOrEmpty(errorMessage))
+                    errorMessage = "Assertion failed";
+
+                throw new Exception(errorMessage);
+            }
         }
     }
 }
