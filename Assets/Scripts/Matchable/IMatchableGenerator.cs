@@ -4,6 +4,6 @@ namespace TapBlitz.Matchable
 {
     public interface IMatchableGenerator
     {
-        public IMatchable[] GenerateMatchables(int count);
+        public IMatchable[] GenerateMatchables(int count, int colors);
     }
 }
