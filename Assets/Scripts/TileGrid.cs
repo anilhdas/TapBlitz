@@ -7,17 +7,21 @@ using TapBlitz.Util;
 namespace TapBlitz.Grid
 {
     [RequireComponent(typeof(HorizontalLayoutGroup))]
-    public class TileGrid : MonoBehaviour
+    public class TileGrid : MonoBehaviour, IMatchableGrid
     {
-        private VerticalLayoutGroup[] _columns;
+        public string MyName { get; set; }
 
+        private int _rowCount, _columnCount;
         private Color[] _colors;
-        private Tile[] _tileGrid;
+
+        private VerticalLayoutGroup[] _columns;
+        private Tile[,] _tileGrid;
 
         #region Unity Callbacks
 
         void Awake()
         {
+            MyName = gameObject.name;
         }
 
         // Update is called once per frame
@@ -29,31 +33,26 @@ namespace TapBlitz.Grid
         #endregion
 
 
-        private void CreateGrid(int rowCount, int columnCount, Color[] colors)
+        public void CreateGrid(int rowCount, int columnCount, Color[] colors)
         {
-            CreateLayout(columnCount);
+            _rowCount = rowCount;
+            _columnCount = columnCount;
 
             _colors = colors;
 
-            int tileCount = rowCount * columnCount;
+            CreateLayout();
 
-            _tileGrid = new Tile[tileCount];
-
-            for (var i = 0; i < tileCount; i++)
-            {
-                int tileId = Random.Range(0, _colors.Length);
-
-            }
+            CreateTiles();
         }
 
-        private void CreateLayout(int columns)
+        private void CreateLayout()
         {
             var layoutGroup = gameObject.GetComponent<HorizontalLayoutGroup>();
 
             layoutGroup.spacing = 20f;
             layoutGroup.childAlignment = TextAnchor.MiddleCenter;
 
-            layoutGroup.reverseArrangement = false;
+            layoutGroup.reverseArrangement = true;
 
             layoutGroup.childControlWidth = true;
             layoutGroup.childControlHeight = true;
@@ -61,11 +60,14 @@ namespace TapBlitz.Grid
             layoutGroup.childForceExpandWidth = true;
             layoutGroup.childForceExpandHeight = true;
 
-            _columns = new VerticalLayoutGroup[columns];
+            _columns = new VerticalLayoutGroup[_columnCount];
 
-            for (int i = 0; i < columns; i++)
+            for (int i = 0; i < _columnCount; i++)
             {
                 var column = new GameObject($"Column {i}");
+
+                column.AddComponent<RectTransform>();
+                column.AddComponent<CanvasRenderer>();
 
                 _columns[i] = column.AddComponent<VerticalLayoutGroup>();
 
@@ -85,7 +87,17 @@ namespace TapBlitz.Grid
 
         private void CreateTiles()
         {
+            _tileGrid = new Tile[_rowCount, _columnCount];
 
+            for (var rowIdx = 0; rowIdx < _rowCount; rowIdx++)
+            {
+                for (var colIdx = 0; colIdx < _columnCount; colIdx++)
+                {
+                    int tileId = Random.Range(0, _colors.Length);
+
+                    //_tileGrid[rowIdx][colIdx] = 
+                }
+            }
         }
 
         public void ButtonPressed(int buttonId)

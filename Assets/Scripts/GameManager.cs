@@ -4,13 +4,14 @@ using TapBlitz.Matchable;
 using Zenject;
 using UnityEngine;
 using TapBlitz.Config;
+using TapBlitz.Grid;
 
 namespace TapBlitz
 {
     public class GameManager : MonoBehaviour
     {
         [Inject]
-        private IMatchableGenerator _generator;
+        private IMatchableGrid _grid;
 
         [SerializeField]
         private GameConfig _gameConfig;
@@ -21,7 +22,7 @@ namespace TapBlitz
 
         private void Awake()
         {
-            Assert.IsTrue(_generator != null, $"{nameof(_generator)} in gameobject {gameObject.name} is not assigned");
+            Assert.IsTrue(_grid != null, $"{nameof(_grid)} in gameobject {gameObject.name} is not injected");
             Assert.IsTrue(_gameConfig != null, $"{nameof(_gameConfig)} in gameobject {gameObject.name} is not assigned");
 
             resetGame();
@@ -41,10 +42,10 @@ namespace TapBlitz
 
             var levelConfig = _gameConfig.levelConfigs[_currentLevel];
 
-            var totalMatchables = levelConfig.TotalRows * levelConfig.TotalCols;
-            var totalColors = levelConfig.TileColors;
+            Debug.Log($"Obj Name: {_grid.MyName}");
+            //_grid.CreateGrid(levelConfig.TotalRows, levelConfig.TotalCols, levelConfig.TileColors);
 
-            var initialMatchables = _generator.GenerateMatchables(totalMatchables, totalColors.Length);
+            //var initialMatchables = _generator.GenerateMatchables(totalMatchables, totalColors.Length);
         }
 
         private void resetGame()

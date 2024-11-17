@@ -328,6 +328,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcc74f523bdb05e45a3fc689872aa877, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _tileGrid: {fileID: 6128791802003706435}
 --- !u!114 &459703115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1653,7 +1654,7 @@ MonoBehaviour:
   m_ChildControlHeight: 1
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
-  m_ReverseArrangement: 0
+  m_ReverseArrangement: 1
 --- !u!114 &6128791802003706435
 MonoBehaviour:
   m_ObjectHideFlags: 0
