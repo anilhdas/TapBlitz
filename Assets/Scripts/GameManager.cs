@@ -42,9 +42,9 @@ namespace TapBlitz
             var levelConfig = _gameConfig.levelConfigs[_currentLevel];
 
             var totalMatchables = levelConfig.TotalRows * levelConfig.TotalCols;
-            var totalColors = levelConfig.TotalColors;
+            var totalColors = levelConfig.TileColors;
 
-            var initialMatchables = _generator.GenerateMatchables(totalMatchables, totalColors);
+            var initialMatchables = _generator.GenerateMatchables(totalMatchables, totalColors.Length);
         }
 
         private void resetGame()

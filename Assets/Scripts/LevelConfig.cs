@@ -7,6 +7,7 @@ namespace TapBlitz.Config
     {
         public int TotalRows = 5;
         public int TotalCols = 4;
-        public int TotalColors = 4;
+
+        public Color[] TileColors;
     }
 }
