@@ -9,8 +9,6 @@ namespace TapBlitz.Grid
     [RequireComponent(typeof(HorizontalLayoutGroup))]
     public class TileGrid : MonoBehaviour, IMatchableGrid
     {
-        public string MyName { get; set; }
-
         private int _rowCount, _columnCount;
         private Color[] _colors;
 
@@ -21,7 +19,6 @@ namespace TapBlitz.Grid
 
         void Awake()
         {
-            MyName = gameObject.name;
         }
 
         // Update is called once per frame

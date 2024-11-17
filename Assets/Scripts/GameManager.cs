@@ -42,7 +42,6 @@ namespace TapBlitz
 
             var levelConfig = _gameConfig.levelConfigs[_currentLevel];
 
-            Debug.Log($"Obj Name: {_grid.MyName}");
             //_grid.CreateGrid(levelConfig.TotalRows, levelConfig.TotalCols, levelConfig.TileColors);
 
             //var initialMatchables = _generator.GenerateMatchables(totalMatchables, totalColors.Length);
