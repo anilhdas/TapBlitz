@@ -14,7 +14,7 @@ namespace TapBlitz.Matchable
             for(var i = 0; i < count; i++)
             {
                 int tileId = Random.Range(0, types);
-                matchables[i] = new Tile(tileId);
+                //matchables[i] = new Tile(tileId);
             }
 
             return matchables;
