@@ -41,7 +41,7 @@ namespace TapBlitz
 
             var levelConfig = _gameConfig.levelConfigs[_currentLevel];
 
-            _grid.CreateGrid(levelConfig.TotalRows, levelConfig.TotalCols, levelConfig.TileColors);
+            StartCoroutine(_grid.CreateGrid(levelConfig.TotalRows, levelConfig.TotalCols, levelConfig.TileColors, _gameConfig.TileGenDelay));
         }
 
         private void resetGame()

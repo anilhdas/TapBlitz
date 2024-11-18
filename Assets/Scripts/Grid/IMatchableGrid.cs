@@ -1,9 +1,10 @@
+using System.Collections;
 using UnityEngine;
 
 namespace TapBlitz.Grid
 {
     public interface IMatchableGrid
     {
-        public void CreateGrid(int rowCount, int columnCount, Color[] colors);
+        public IEnumerator CreateGrid(int rowCount, int columnCount, Color[] colors, float tileGenDelay);
     }
 }

@@ -27,9 +27,14 @@ namespace TapBlitz.Matchable
             ColIdx = col;
         }
 
-        public bool IsMatch(Tile otherTile)
+        public void MarkVisited()
         {
             IsVisited = true;
+        }
+
+        public bool IsMatch(Tile otherTile)
+        {
+            MarkVisited();
             return _id == otherTile._id;
         }
 

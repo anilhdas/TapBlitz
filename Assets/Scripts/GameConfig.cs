@@ -7,5 +7,7 @@ namespace TapBlitz.Config
     public class GameConfig : ScriptableObject
     {
         public LevelConfig[] levelConfigs;
+
+        public float TileGenDelay = 0.005f;
     }
 }
