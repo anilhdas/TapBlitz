@@ -1,6 +1,6 @@
 using System;
 
-namespace TapBlitz.Util
+namespace TapBlitzUtils
 {
     public class Assert
     {

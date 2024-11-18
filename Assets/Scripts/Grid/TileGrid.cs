@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Unity.Profiling;
 
-using TapBlitz.Util;
+using TapBlitzUtils;
 
 namespace TapBlitz.Grid
 {
@@ -106,7 +106,7 @@ namespace TapBlitz.Grid
             {
                 for (var colIdx = 0; colIdx < _columnCount; colIdx++)
                 {
-                    yield return new WaitForSeconds(_tileGenDelay);
+                    yield return TimeUtil.WaitForSeconds(_tileGenDelay);
                     CreateRandomTile(colIdx);
                 }
             }
@@ -209,7 +209,7 @@ namespace TapBlitz.Grid
             {
                 var colIdx = destroyedColumns.Dequeue();
                 CreateRandomTile(colIdx);
-                yield return new WaitForSeconds(_tileGenDelay);
+                yield return TimeUtil.WaitForSeconds(_tileGenDelay);
             }
 
             updateTileGrid();
