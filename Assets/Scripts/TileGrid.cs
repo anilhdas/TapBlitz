@@ -33,6 +33,11 @@ namespace TapBlitz.Grid
 
         #endregion
 
+        private void setGridInteractable(bool interactable)
+        {
+            _canvasGroup.interactable = interactable;
+        }
+
         public IEnumerator CreateGrid(int rowCount, int columnCount, Color[] colors, float tileGenDelay)
         {
             setGridInteractable(false);
@@ -126,23 +131,15 @@ namespace TapBlitz.Grid
             setGridInteractable(false);
 
             Queue<int> affectedColumns = new Queue<int>();
-            StartCoroutine(destroyMatchingTiles(rowIdx, colIdx, affectedColumns));
-
+            destroyMatchingTiles(rowIdx, colIdx, affectedColumns);
             Debug.Log($"Destroyed {affectedColumns.Count} tiles");
 
-            regenerateNewTiles(affectedColumns);
-
-            updateTileGrid();
+            StartCoroutine(regenerateNewTiles(affectedColumns));
 
             setGridInteractable(true);
         }
 
-        private void setGridInteractable(bool interactable)
-        {
-            _canvasGroup.interactable = interactable;
-        }
-
-        private IEnumerator destroyMatchingTiles(int rowIdx, int colIdx, Queue<int> affectedColumns)
+        private void destroyMatchingTiles(int rowIdx, int colIdx, Queue<int> affectedColumns)
         {
             var clickedTile = _tileGrid[rowIdx, colIdx];
             Assert.IsTrue(clickedTile != null, $"Invalid Tile at {rowIdx}, {colIdx}");
@@ -158,7 +155,6 @@ namespace TapBlitz.Grid
                 var currentTile = matchedTiles.Dequeue();
                 affectedColumns.Enqueue(currentTile.ColIdx);
                 currentTile.MarkVisited();
-                yield return new WaitForSeconds(_tileGenDelay);
 
                 var neighbors = getValidNeighbors(currentTile.RowIdx, currentTile.ColIdx);
 
@@ -203,13 +199,16 @@ namespace TapBlitz.Grid
             return matches;
         }
 
-        private void regenerateNewTiles(Queue<int> destroyedColumns)
+        private IEnumerator regenerateNewTiles(Queue<int> destroyedColumns)
         {
             while (destroyedColumns.Count > 0)
             {
                 var colIdx = destroyedColumns.Dequeue();
                 CreateRandomTile(colIdx);
+                yield return new WaitForSeconds(_tileGenDelay);
             }
+
+            updateTileGrid();
         }
 
         private void updateTileGrid()
