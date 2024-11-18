@@ -1,7 +1,7 @@
 using TapBlitz.Util;
 using UnityEngine;
 
-namespace TapBlitz.Matchable
+namespace TapBlitz.Grid
 {
     public class Tile : MonoBehaviour
     {

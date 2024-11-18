@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using Unity.Profiling;
 
-using TapBlitz.Matchable;
 using TapBlitz.Util;
 
 namespace TapBlitz.Grid
