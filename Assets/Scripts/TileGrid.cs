@@ -24,6 +24,8 @@ namespace TapBlitz.Grid
         private VerticalLayoutGroup[] _columns;
         private Tile[,] _tileGrid;
 
+        public System.Action<int> MatchablesDestroyed { get; set; }
+
         #region Unity Callbacks
 
         void Awake()
@@ -126,15 +128,16 @@ namespace TapBlitz.Grid
             tileObj.AddComponent<Tile>().SetId(tileId);
         }
 
-        public void ButtonPressed(int rowIdx, int colIdx)
+        public void HandleButtonPressed(int rowIdx, int colIdx)
         {
             setGridInteractable(false);
 
-            Queue<int> affectedColumns = new Queue<int>();
-            destroyMatchingTiles(rowIdx, colIdx, affectedColumns);
-            Debug.Log($"Destroyed {affectedColumns.Count} tiles");
+            Queue<int> destroyedTileIndicess = new Queue<int>();
+            destroyMatchingTiles(rowIdx, colIdx, destroyedTileIndicess);
 
-            StartCoroutine(regenerateNewTiles(affectedColumns));
+            MatchablesDestroyed?.Invoke(destroyedTileIndicess.Count);
+
+            StartCoroutine(regenerateNewTiles(destroyedTileIndicess));
 
             setGridInteractable(true);
         }
@@ -234,7 +237,7 @@ namespace TapBlitz.Grid
                         // todo: Investigate why we need copies
                         int rowId = rowIdx;
                         int colId = colIdx;
-                        button.onClick.AddListener(() => {ButtonPressed(rowId, colId); });
+                        button.onClick.AddListener(() => { HandleButtonPressed(rowId, colId); });
 
                         tile.SetPosition(rowIdx, colIdx);
                         _tileGrid[rowIdx, colIdx] = tile;

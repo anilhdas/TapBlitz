@@ -17,6 +17,8 @@ namespace TapBlitz
         private IMatchableGrid _grid;
 
         private int _currentLevel;
+        private int _score;
+        private int _turns;
 
         #region Unity callbacks
 
@@ -26,6 +28,8 @@ namespace TapBlitz
             Assert.IsTrue(_grid != null, $"{nameof(_grid)} in gameobject {gameObject.name} is not injected");
 
             resetGame();
+
+            _grid.MatchablesDestroyed += HandleMatchableDestroyed;
         }
 
         void Start()
@@ -34,6 +38,14 @@ namespace TapBlitz
         }
 
         #endregion
+
+        private void HandleMatchableDestroyed(int count)
+        {
+            _turns++;
+            _score += count;
+
+            Debug.Log($"Turns: {_turns} || Score: {_score}");
+        }
 
         private void loadNextLevel()
         {
@@ -47,7 +59,8 @@ namespace TapBlitz
         private void resetGame()
         {
             _currentLevel = -1;
+            _score = 0;
+            _turns = 0;
         }
     }
-
 }
