@@ -25,6 +25,8 @@ namespace TapBlitz.Matchable
         {
             RowIdx = row;
             ColIdx = col;
+
+            ResetTile();
         }
 
         public void MarkVisited()
@@ -38,27 +40,10 @@ namespace TapBlitz.Matchable
             return _id == otherTile._id;
         }
 
-        public void DestroyTile()
-        {
-            IsVisited = true;
-            _destroyed = true;
-        }
-
         private void ResetTile()
         {
             Assert.IsTrue(!_destroyed, $"Invalid tile {gameObject.name} still not destroyed");
             IsVisited = false;
         }
-
-        #region Unity Callbacks
-        void Update()
-        {
-            if (!_destroyed)
-                return;
-
-            // todo: Object pooling
-            Destroy(gameObject);
-        }
-        #endregion
     }
 }

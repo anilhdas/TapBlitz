@@ -142,6 +142,7 @@ namespace TapBlitz.Grid
         private void destroyMatchingTiles(int rowIdx, int colIdx, Queue<int> affectedColumns)
         {
             var clickedTile = _tileGrid[rowIdx, colIdx];
+
             Assert.IsTrue(clickedTile != null, $"Invalid Tile at {rowIdx}, {colIdx}");
 
             Assert.IsTrue(affectedColumns != null && affectedColumns.Count == 0, $"{affectedColumns} is either null or not empty");
@@ -166,6 +167,7 @@ namespace TapBlitz.Grid
                     }
                 }
 
+                // todo: Object pooling
                 Destroy(currentTile.gameObject);
             }
         }
