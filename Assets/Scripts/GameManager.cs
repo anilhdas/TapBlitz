@@ -10,11 +10,11 @@ namespace TapBlitz
 {
     public class GameManager : MonoBehaviour
     {
-        [Inject]
-        private IMatchableGrid _grid;
-
         [SerializeField]
         private GameConfig _gameConfig;
+
+        [Inject]
+        private IMatchableGrid _grid;
 
         private int _currentLevel;
 
@@ -22,8 +22,8 @@ namespace TapBlitz
 
         private void Awake()
         {
-            Assert.IsTrue(_grid != null, $"{nameof(_grid)} in gameobject {gameObject.name} is not injected");
             Assert.IsTrue(_gameConfig != null, $"{nameof(_gameConfig)} in gameobject {gameObject.name} is not assigned");
+            Assert.IsTrue(_grid != null, $"{nameof(_grid)} in gameobject {gameObject.name} is not injected");
 
             resetGame();
         }
@@ -37,14 +37,11 @@ namespace TapBlitz
 
         private void loadNextLevel()
         {
-            UnityEngine.Profiling.Profiler.BeginSample($"{nameof(loadNextLevel)}");
             _currentLevel++;
 
             var levelConfig = _gameConfig.levelConfigs[_currentLevel];
 
             _grid.CreateGrid(levelConfig.TotalRows, levelConfig.TotalCols, levelConfig.TileColors);
-
-            //var initialMatchables = _generator.GenerateMatchables(totalMatchables, totalColors.Length);
         }
 
         private void resetGame()

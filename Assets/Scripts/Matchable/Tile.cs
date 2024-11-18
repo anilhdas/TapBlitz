@@ -8,9 +8,10 @@ namespace TapBlitz.Matchable
         private int _id = -1;
         private bool _destroyed = false;
 
+        public int RowIdx { get; private set; }
+        public int ColIdx { get; private set; }
+
         public bool IsVisited { get; private set; }
-        public int Xpos { get; private set; }
-        public int Ypos { get; private set; }
 
         public void SetId(int newId)
         {
@@ -20,18 +21,16 @@ namespace TapBlitz.Matchable
             _id = newId;
         }
 
-        public void SetCoordinate(int x, int y)
+        public void SetPosition(int row, int col)
         {
-            ResetTile();
-
-            Xpos = x;
-            Ypos = y;
+            RowIdx = row;
+            ColIdx = col;
         }
 
-        public bool IsMatch(int tileId)
+        public bool IsMatch(Tile otherTile)
         {
             IsVisited = true;
-            return _id == tileId;
+            return _id == otherTile._id;
         }
 
         public void DestroyTile()
@@ -47,12 +46,12 @@ namespace TapBlitz.Matchable
         }
 
         #region Unity Callbacks
-
         void Update()
         {
             if (!_destroyed)
                 return;
 
+            // todo: Object pooling
             Destroy(gameObject);
         }
         #endregion
